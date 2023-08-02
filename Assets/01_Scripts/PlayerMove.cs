@@ -60,10 +60,9 @@ public class PlayerMove : MonoBehaviour
         //yVelocity 값을 dir 의 y 값에 셋팅
         dir.y = yVelocity;
 
-        
-
         //3. 그방향으로 움직이자.
         //transform.position += dir * speed * Time.deltaTime;
         cc.Move(dir * speed * Time.deltaTime);
+          
     }
 }
