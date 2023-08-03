@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
         PhotonNetwork.SerializationRate = 30;
 
         //나의 Player 생성
-        PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.identity);
+        PhotonNetwork.Instantiate("Player", new Vector3(0, 1, 0), Quaternion.identity);
     }
 
     // Update is called once per frame
