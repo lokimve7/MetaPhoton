@@ -59,7 +59,6 @@ public class PlayerFire : MonoBehaviourPun
     [PunRPC]
     void FireBulletByRpc(Vector3 firePos, Vector3 fireFoward)
     {
-
         GameObject bomb = Instantiate(bombFactory);
         bomb.transform.position = firePos;
         bomb.transform.forward = fireFoward;
@@ -82,6 +81,16 @@ public class PlayerFire : MonoBehaviourPun
             fragment.transform.forward = hitInfo.normal;
             //2초 뒤에 파편효과를 파괴하자
             Destroy(fragment, 2);
+
+            //만약에 맞은놈의 이름이 Player 를 포함하고 있다면
+            if (hitInfo.transform.gameObject.name.Contains("Player"))
+            {
+                //플레이어가 가지고 있는 PlayerHP 컴포넌트 가져오자
+                PlayerHP hp = hitInfo.transform.GetComponent<PlayerHP>();
+                //가져온 컴포넌의 UpdateHP 함수를 실행
+               
+                hp.UpdateHP(-10);
+            }
         }
     }
 }

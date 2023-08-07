@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
@@ -9,10 +9,10 @@ public class GameManager : MonoBehaviour
     void Start()
     {
 
-        //OnPhotonSerializeView È£Ãâ ºóµµ
+        //OnPhotonSerializeView í˜¸ì¶œ ë¹ˆë„
         PhotonNetwork.SerializationRate = 30;
 
-        //³ªÀÇ Player »ı¼º
+        //ë‚˜ì˜ Player ìƒì„±
         PhotonNetwork.Instantiate("Player", new Vector3(0, 1, 0), Quaternion.identity);
     }
 

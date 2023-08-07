@@ -1,13 +1,13 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Bomb : MonoBehaviour
 {
-    //ÃÑ¾Ë ¼Ó·Â
+    //ì´ì•Œ ì†ë ¥
     float speed = 10;
 
-    //Æø¹ßÈ¿°ú°øÀå
+    //í­ë°œíš¨ê³¼ê³µì¥
     public GameObject exploFactory;
 
     void Start()
@@ -17,38 +17,38 @@ public class Bomb : MonoBehaviour
 
     void Update()
     {
-        //°è¼Ó ¾ÕÀ¸·Î °¡°í ½Í´Ù.
+        //ê³„ì† ì•ìœ¼ë¡œ ê°€ê³  ì‹¶ë‹¤.
         transform.position += transform.forward * speed * Time.deltaTime;
 
-        //PhotonNetwork.Instantiate ÀÌ¿ëÇÒ ¶§
-        ////³»°¡ ½ğ ÃÑ¾Ë¸¸ ¿òÁ÷ÀÌ°Ô ÇÏÀÚ
+        //PhotonNetwork.Instantiate ì´ìš©í•  ë•Œ
+        ////ë‚´ê°€ ìœ ì´ì•Œë§Œ ì›€ì§ì´ê²Œ í•˜ì
         //if (photonView.IsMine)
         //{
-        //    //°è¼Ó ¾ÕÀ¸·Î °¡°í ½Í´Ù.
+        //    //ê³„ì† ì•ìœ¼ë¡œ ê°€ê³  ì‹¶ë‹¤.
         //    transform.position += transform.forward * speed * Time.deltaTime;
         //}
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        //Æø¹ßÈ¿°ú°øÀå¿¡¼­ Æø¹ßÈ¿°ú¸¦ ¸¸µéÀÚ.
+        //í­ë°œíš¨ê³¼ê³µì¥ì—ì„œ í­ë°œíš¨ê³¼ë¥¼ ë§Œë“¤ì.
         GameObject explo = Instantiate(exploFactory);
-        //¸¸µç È¿°ú¸¦ ³ªÀÇ À§Ä¡¿¡ ³õÀÚ.
+        //ë§Œë“  íš¨ê³¼ë¥¼ ë‚˜ì˜ ìœ„ì¹˜ì— ë†“ì.
         explo.transform.position = transform.position;
-        //¸¸µç È¿°ú¿¡¼­ ParticleSystem À» °¡Á®¿ÀÀÚ.
+        //ë§Œë“  íš¨ê³¼ì—ì„œ ParticleSystem ì„ ê°€ì ¸ì˜¤ì.
         ParticleSystem ps = explo.GetComponent<ParticleSystem>();
-        //°¡Á®¿Â ParticleSystem ÀÇ ±â´ÉÀÌ Play ¸¦ ½ÇÇà ÇÏÀÚ.
+        //ê°€ì ¸ì˜¨ ParticleSystem ì˜ ê¸°ëŠ¥ì´ Play ë¥¼ ì‹¤í–‰ í•˜ì.
         ps.Play();
-        //2ÃÊµÚ¿¡ explo ¸¦ ÆÄ±«ÇÏÀÚ.
+        //2ì´ˆë’¤ì— explo ë¥¼ íŒŒê´´í•˜ì.
         Destroy(explo, 2);
 
-        //³ª¸¦ ÆÄ±«ÇÏÀÚ
+        //ë‚˜ë¥¼ íŒŒê´´í•˜ì
         Destroy(gameObject);
-
-        ////³»°¡ ½ğ ÃÑ¾Ë¸¸ 
+        
+        ////ë‚´ê°€ ìœ ì´ì•Œë§Œ 
         //if (photonView.IsMine)
         //{
-        //    //³ª¸¦ ÆÄ±«ÇÏÀÚ
+        //    //ë‚˜ë¥¼ íŒŒê´´í•˜ì
         //    PhotonNetwork.Destroy(gameObject);
         //}
     }
