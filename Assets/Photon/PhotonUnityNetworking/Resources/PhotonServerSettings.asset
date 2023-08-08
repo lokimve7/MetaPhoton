@@ -17,7 +17,7 @@ MonoBehaviour:
     AppIdFusion: 
     AppIdChat: 
     AppIdVoice: 
-    AppVersion: 1.01
+    AppVersion: 1.0
     UseNameServer: 1
     FixedRegion: asia
     Server: 
@@ -41,7 +41,7 @@ MonoBehaviour:
   - RespawnSpaceship
   - FireBulletByRpc
   - FireRayByRpc
-  - UpdateHPRpc
+  - AddChatRpc
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

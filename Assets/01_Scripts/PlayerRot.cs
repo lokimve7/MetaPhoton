@@ -21,7 +21,8 @@ public class PlayerRot : MonoBehaviourPun
         //내가 생성한 Player 일때만 카메라를 활성화 하자
         if (photonView.IsMine)
         {
-            trCam.gameObject.SetActive(true);
+            //trCam.gameObject.SetActive(true);
+            trCam.GetChild(0).gameObject.SetActive(true);
         }
     }
 
@@ -29,7 +30,10 @@ public class PlayerRot : MonoBehaviourPun
     {
         //내것이 아닐때 함수를 나가자
         if (photonView.IsMine == false) return;
-        
+
+        //만약에 마우스 커서가 활성화 되어 있으면 함수를 나가자
+        if (Cursor.visible == true) return;
+
 
         //마우스의 움직임따라 플레이를 좌우 회전하고
         //카메라를 위아래 회전하고 싶다.
