@@ -87,8 +87,7 @@ public class PlayerFire : MonoBehaviourPun
             {
                 //플레이어가 가지고 있는 PlayerHP 컴포넌트 가져오자
                 PlayerHP hp = hitInfo.transform.GetComponent<PlayerHP>();
-                //가져온 컴포넌의 UpdateHP 함수를 실행
-               
+                //가져온 컴포넌의 UpdateHP 함수를 실행               
                 hp.UpdateHP(-10);
             }
         }
