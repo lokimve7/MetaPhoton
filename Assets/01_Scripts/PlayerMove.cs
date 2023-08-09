@@ -60,6 +60,9 @@ public class PlayerMove : MonoBehaviourPun, IPunObservable
             //nickName 설정
             nickName.text = photonView.Owner.NickName;
         }
+
+        //나의 PhotonView GameManager 에 알려주자
+        GameManager.instance.AddPlayer(photonView);
     }
 
     void Update()
