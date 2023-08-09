@@ -95,7 +95,7 @@ public class PlayerMove : MonoBehaviourPun, IPunObservable
                 if(isJump == true)
                 {
                     //착지 Trigger 발생
-                    anim.SetTrigger("Land");
+                    photonView.RPC(nameof(SetTriggerRpc), RpcTarget.All, "Land");
                 }
 
                 //점프 아니라고 설정
@@ -109,7 +109,7 @@ public class PlayerMove : MonoBehaviourPun, IPunObservable
                 yVelocity = jumpPower;
 
                 //점프 Trigger 발생
-                anim.SetTrigger("Jump");
+                photonView.RPC(nameof(SetTriggerRpc), RpcTarget.All, "Jump");
 
                 //점프 중이라고 설정
                 isJump = true;
@@ -138,6 +138,12 @@ public class PlayerMove : MonoBehaviourPun, IPunObservable
         //애니메이션에 Parameter 값 전달
         anim.SetFloat("Horizontal", h);
         anim.SetFloat("Vertical", v);
+    }
+
+    [PunRPC]
+    void SetTriggerRpc(string parameter)
+    {
+        anim.SetTrigger(parameter);
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

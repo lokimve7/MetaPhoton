@@ -20,6 +20,27 @@ public class GameManager : MonoBehaviour
 
         //마우스 포인터를 비활성화
         Cursor.visible = false;
+
+
+        SetSpawnPos();
+    }
+
+    //spawnPosGroup Transform
+    public Transform trSpawnPosGroup;
+    void SetSpawnPos()
+    {
+        //간격 (anlge)
+        float angle = 360 / 10;
+        for(int i = 0; i < 10; i++)
+        {
+            trSpawnPosGroup.Rotate(0, angle, 0);
+
+            Vector3 pos = trSpawnPosGroup.position + trSpawnPosGroup.forward * 5;
+
+            GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cube);
+
+            go.transform.position = pos;
+        }
     }
 
     // Update is called once per frame
