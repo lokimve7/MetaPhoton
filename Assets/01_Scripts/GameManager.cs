@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //RPC 호출 빈도
+        PhotonNetwork.SendRate = 30;
+
         //OnPhotonSerializeView 호출 빈도
         PhotonNetwork.SerializationRate = 30;
 

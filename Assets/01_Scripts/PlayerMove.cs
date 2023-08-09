@@ -30,13 +30,36 @@ public class PlayerMove : MonoBehaviourPun, IPunObservable
     //NickName Text 를 가져오자
     public Text nickName;
 
+    //UI Canvas
+    public GameObject myUI;
+
+    //animator
+    public Animator anim;
+
+    //점프 중이니??
+    bool isJump = false;
+
+    //가로 방향을 결정
+    float h;
+    //세로 방향을 결정
+    float v;
+
     void Start()
     {
         //Character Controller 가져오자
         cc = GetComponent<CharacterController>();
 
-        //nickName 설정
-        nickName.text = photonView.Owner.NickName;
+        //만약에 내가 만든 Player 라면
+        if(photonView.IsMine == true)
+        {
+            //UI 를 비활성화 하자
+            myUI.SetActive(false);
+        }
+        else
+        {
+            //nickName 설정
+            nickName.text = photonView.Owner.NickName;
+        }
     }
 
     void Update()
@@ -50,8 +73,8 @@ public class PlayerMove : MonoBehaviourPun, IPunObservable
             //W, S, A, D 키를 누르면 앞뒤좌우로 움직이고 싶다.
 
             //1. 사용자의 입력을 받자.
-            float h = Input.GetAxis("Horizontal");
-            float v = Input.GetAxis("Vertical");
+            h = Input.GetAxis("Horizontal");
+            v = Input.GetAxis("Vertical");
 
             //2. 방향을 만든다.
             //좌우
@@ -67,6 +90,16 @@ public class PlayerMove : MonoBehaviourPun, IPunObservable
             {
                 //yVeloctiy 를 0 으로 하자
                 yVelocity = 0;
+
+                //만약에 점프 중이라면
+                if(isJump == true)
+                {
+                    //착지 Trigger 발생
+                    anim.SetTrigger("Land");
+                }
+
+                //점프 아니라고 설정
+                isJump = false;
             }
 
             //스페이바를 누르면 점프를 하고 싶다.
@@ -74,6 +107,12 @@ public class PlayerMove : MonoBehaviourPun, IPunObservable
             {
                 //yVelocity 에 jumpPower 를 셋팅
                 yVelocity = jumpPower;
+
+                //점프 Trigger 발생
+                anim.SetTrigger("Jump");
+
+                //점프 중이라고 설정
+                isJump = true;
             }
 
             //yVelocity 를 중력만큼 감소시키자
@@ -85,6 +124,7 @@ public class PlayerMove : MonoBehaviourPun, IPunObservable
             //3. 그방향으로 움직이자.
             //transform.position += dir * speed * Time.deltaTime;
             cc.Move(dir * speed * Time.deltaTime);
+
         }
         //나의 Player 가 아니라면
         else
@@ -94,6 +134,10 @@ public class PlayerMove : MonoBehaviourPun, IPunObservable
             //회전 보정
             transform.rotation = Quaternion.Lerp(transform.rotation, receiveRot, lerpSpeed * Time.deltaTime);
         }
+
+        //애니메이션에 Parameter 값 전달
+        anim.SetFloat("Horizontal", h);
+        anim.SetFloat("Vertical", v);
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -105,6 +149,10 @@ public class PlayerMove : MonoBehaviourPun, IPunObservable
             stream.SendNext(transform.position);
             //나의 회전값을 보낸다.
             stream.SendNext(transform.rotation);
+            //h 값 보낸다.
+            stream.SendNext(h);
+            //v 값 보낸다.
+            stream.SendNext(v);
         }
         //내 Player 아니라면
         else
@@ -113,6 +161,10 @@ public class PlayerMove : MonoBehaviourPun, IPunObservable
             receivePos = (Vector3)stream.ReceiveNext();
             //회전값을 받자.
             receiveRot = (Quaternion)stream.ReceiveNext();
+            //h 값 받자.
+            h = (float)stream.ReceiveNext();
+            //v 값 받자.
+            v = (float)stream.ReceiveNext();
         }
     }
 }

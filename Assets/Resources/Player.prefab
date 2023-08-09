@@ -418,6 +418,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nickName: {fileID: 727812259987757040}
+  myUI: {fileID: 1442126599122759680}
+  anim: {fileID: 4710039657462689178}
 --- !u!114 &3491877219082127896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -781,6 +783,11 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: 9c3cc8ec48300fc42af956d20fb0f8fe, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 860793eb3324391468f1c120a75ec049, type: 3}
+--- !u!95 &4710039657462689178 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9500000, guid: 860793eb3324391468f1c120a75ec049, type: 3}
+  m_PrefabInstance: {fileID: 4710039657469974778}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4710039657470362168 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400066, guid: 860793eb3324391468f1c120a75ec049, type: 3}
