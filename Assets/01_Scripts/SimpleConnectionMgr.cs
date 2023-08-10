@@ -49,7 +49,7 @@ public class SimpleConnectionMgr : MonoBehaviourPunCallbacks
         RoomOptions roomOptioin = new RoomOptions();
 
         //방에 들어올 수 있는 최대 인원
-        roomOptioin.MaxPlayers = 3;
+        roomOptioin.MaxPlayers = 20;
 
         PhotonNetwork.JoinOrCreateRoom("meta_unity_room", roomOptioin, TypedLobby.Default);
     }
