@@ -95,6 +95,17 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         print("방 입장 실패 : " + message);
     }
 
+    // 누군가 방을 만들거나 수정했을때 호출되는 함수
+    public override void OnRoomListUpdate(List<RoomInfo> roomList)
+    {
+        base.OnRoomListUpdate(roomList);
+       
+        for(int i = 0; i < roomList.Count; i++)
+        {
+            print(i + "번째 방 : " + roomList[i].Name);
+        }
+    }
+
 
     void Update()
     {
