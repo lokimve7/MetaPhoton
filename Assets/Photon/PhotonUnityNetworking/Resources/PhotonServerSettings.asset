@@ -15,8 +15,8 @@ MonoBehaviour:
   AppSettings:
     AppIdRealtime: 1803bed8-fc04-4f03-ae25-7b5ff6d45ea2
     AppIdFusion: 
-    AppIdChat: 
-    AppIdVoice: 
+    AppIdChat: 4c9accd7-88d8-4f8c-a81a-2f53caa1594a
+    AppIdVoice: b947de06-1411-46b3-8018-23a1bea78166
     AppVersion: 1.0
     UseNameServer: 1
     FixedRegion: asia
@@ -44,6 +44,7 @@ MonoBehaviour:
   - AddChatRpc
   - SetTriggerRpc
   - ChangeTurnRpc
+  - ChangeColour
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0
