@@ -443,6 +443,8 @@ MonoBehaviour:
   inputMaxPlayer: {fileID: 1769321020}
   btnJoinRoom: {fileID: 779334504}
   btnCreateRoom: {fileID: 1218281208}
+  roomItemFactory: {fileID: 3625928300321825944, guid: 6a8096638bc488e4e8dbe324b8c4eeb8, type: 3}
+  rtContent: {fileID: 620784973}
 --- !u!4 &420152016
 Transform:
   m_ObjectHideFlags: 0

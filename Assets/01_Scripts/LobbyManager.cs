@@ -16,6 +16,14 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     //방 생성 버튼
     public Button btnCreateRoom;
 
+    //RoomItem Prefab
+    public GameObject roomItemFactory;
+    //RoomListView -> Content -> RectTransform
+    public RectTransform rtContent;
+
+    //방 정보 가지고 있는 Dictionary
+    Dictionary<string, RoomInfo> roomCache = new Dictionary<string, RoomInfo>();
+
     void Start()
     {
         //방 참여, 생성 비활성화
@@ -24,6 +32,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         inputRoomName.onValueChanged.AddListener(OnValueChangedRoomName);
         //inputMaxPlayer 의 내용이 변경될 때 호출되는 함수
         inputMaxPlayer.onValueChanged.AddListener(OnValueChangedMaxPlayer);
+
     }
 
     //참여 & 생성 버튼에 관여
@@ -95,15 +104,77 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         print("방 입장 실패 : " + message);
     }
 
+    void RemoveRoomList()
+    {
+        //rtContent 에 있는 자식 GameObject 를 모두 삭제
+        for(int i = 0; i < rtContent.childCount; i++)
+        {
+            Destroy(rtContent.GetChild(i).gameObject);
+        }
+
+
+        //foreach (Transform tr in rtContent)
+        //{
+        //    Destroy(tr.gameObject);
+        //}
+    }
+
+    void UpdateRoomList(List<RoomInfo> roomList)
+    {
+        foreach(RoomInfo info in roomList)
+        {
+            //roomCache 에 info 의 방이름 으로 되어있는 Key 값 존재하니?
+            if(roomCache.ContainsKey(info.Name))
+            {
+                //삭제 해야하니?
+                if(info.RemovedFromList)
+                {
+                    roomCache.Remove(info.Name);
+                }
+                //수정
+                else
+                {
+                    roomCache[info.Name] = info;
+                }
+            }
+            else
+            {
+                //추가
+                roomCache[info.Name] = info;
+            }
+        }
+    }
+
+    void CreateRoomList()
+    {
+        foreach(RoomInfo info in roomCache.Values)
+        {
+            //roomItem prefab 을 이용해서 roomItem 을 만든다. 
+            GameObject goRoomItem = Instantiate(roomItemFactory, rtContent);
+            ////만들어진 roomItem 의 부모를 scrollView -> Content 의 transform 으로 한다.
+            //goRoomItem.transform.parent = rtContent;
+
+            //만들어진 roomItem 에서 RoomItem 컴포넌트 가져온다.
+            RoomItem roomItem = goRoomItem.GetComponent<RoomItem>();
+            //가져온 컴포넌트가 가지고 있는 SetInfo 함수 실행
+            roomItem.SetInfo(info.Name, info.PlayerCount, info.MaxPlayers);
+        }
+    }
+
     // 누군가 방을 만들거나 수정했을때 호출되는 함수
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
         base.OnRoomListUpdate(roomList);
-       
-        for(int i = 0; i < roomList.Count; i++)
-        {
-            print(i + "번째 방 : " + roomList[i].Name);
-        }
+
+
+        //전체 룸리스트UI 삭제
+        RemoveRoomList();
+        //내가 따로 관리하는 룸리스트 정보 갱신
+        UpdateRoomList(roomList);
+        //룸리스트 정보를 가지고 UI 를 다시 생성
+        CreateRoomList();
+
+        
     }
 
 
