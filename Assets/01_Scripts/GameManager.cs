@@ -102,7 +102,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     public void AddPlayer(PhotonView pv)
     {
         listPlayer.Add(pv);
-
+        
         //모든 Player 가 참여했다면
         if(listPlayer.Count == PhotonNetwork.CurrentRoom.MaxPlayers)
         {
