@@ -29,6 +29,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     void Start()
     {
+        SoundManager.instance.PlayBGM(SoundManager.EBgm.BGM_LOBBY);
+
         //방 참여, 생성 비활성화
         btnJoinRoom.interactable = btnCreateRoom.interactable = false;
         //inputRoomName 의 내용이 변경될 때 호출되는 함수
@@ -103,6 +105,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void JoinRoom()
     {
+        
         //방 입장 요청
         PhotonNetwork.JoinRoom(inputRoomName.text + inputPassword.text);
     }
@@ -114,6 +117,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         print("방 입장 완료");
 
         //GameScene 으로 이동
+        PhotonNetwork.LoadLevel("GameScene");
     }
 
     // 방 입장 실패시 호출되는 함수

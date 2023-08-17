@@ -116,6 +116,8 @@ public class PlayerMove : MonoBehaviourPun, IPunObservable
 
                 //점프 중이라고 설정
                 isJump = true;
+
+                SoundManager.instance.PlaySFX(SoundManager.ESfx.SFX_JUMP);
             }
 
             //yVelocity 를 중력만큼 감소시키자

@@ -15,6 +15,9 @@ public class ConnectionManager : MonoBehaviourPunCallbacks
 
     void Start()
     {
+        //connection bgm 실행
+        //SoundManager.instance.PlayBGM(SoundManager.EBgm.BGM_CONNECTION);
+
         //inputNickName 의 내용이 변경될 때 호출되는 함수 등록
         inputNickName.onValueChanged.AddListener(OnValueChanged);
 
@@ -56,6 +59,9 @@ public class ConnectionManager : MonoBehaviourPunCallbacks
 
     public void OnClickConnect()
     {
+
+        SoundManager.instance.PlaySFX(SoundManager.ESfx.SFX_BUTTON);
+
         // 서버 접속 요청
         PhotonNetwork.ConnectUsingSettings();
     }
@@ -83,5 +89,13 @@ public class ConnectionManager : MonoBehaviourPunCallbacks
 
         //로비 씬으로 이동
         PhotonNetwork.LoadLevel("LobbyScene");
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            SoundManager.instance.PlaySFX(SoundManager.ESfx.SFX_BUTTON);
+        }
     }
 }

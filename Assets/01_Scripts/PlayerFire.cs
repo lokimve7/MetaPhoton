@@ -26,7 +26,7 @@ public class PlayerFire : MonoBehaviourPun
         if (Cursor.visible == true) return;
 
         //만약에 내가 총을 쏠 수 없는 상태라면 함수를 나가자
-        if (canFire == false) return;
+        //if (canFire == false) return;
 
         //1번키를 누르면
         if(Input.GetKeyDown(KeyCode.Alpha1))
