@@ -114,7 +114,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         print("방 입장 완료");
 
         //GameScene 으로 이동
-        PhotonNetwork.LoadLevel("GameScene");
+        PhotonNetwork.LoadLevel("TestScene");
     }
 
     // 방 입장 실패시 호출되는 함수
